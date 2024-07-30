@@ -1,90 +1,32 @@
+import json
 class modeloFormula:
     def __init__(self):
-        pass
+        self.listaDatos=[]
     
-    def crearArchivo(datoTexto):
-        nombreArchivo=str(input("Escriba el nombre del archivo: "))
-        nombreArchivo=nombreArchivo+".Txt"
-        with open(nombreArchivo,"w") as archivoTexto:
-            archivoTexto.write(datoTexto)
-            mensaje="documento creado.."
-        archivoTexto.close()
-        return mensaje
-
-    def leerArchivo():
-        with open("cristofer.txt","r") as archivo:
-            datoContenido=archivo.read()
-            print(datoContenido)
-            archivo.close()
-            
-    def leerLinea():
-        with open("cristofer.txt","r") as archivo:
-            datoContenido=archivo.readline()
-            print(datoContenido)
-            archivo.close()
-            
-    def leerLineas():
-        with open("cristofer.txt","r") as archivo:
-            datoContenido=archivo.readlines()
-            print(datoContenido)
-            print("cantidad de renglones: ",len(datoContenido))
-            archivo.close()
-            
-    def escribeCadenas():
-        listaDatos=["primera linea.\n","segunda linea\n","tercera linea\n"]
-        with open("cristofer.txt","w") as archivo:
-            archivo.writelines(listaDatos)
-            print("cantidad de renglones: ",len(listaDatos))
-            archivo.close()
-    
-    
-    aux=hacerTexto()
-    crearArchivo(aux)
-    leerArchivo()
-    leerLinea()
-    leerLineas()
-    escribeCadenas()
-    
-        
     def crearArchivo(self,datoTexto):
-        nombreArchivo=str(input("Escriba el nombre del archivo: "))
-        nombreArchivo=nombreArchivo+".Txt"
-        with open(nombreArchivo,"w") as archivoTexto:
-            archivoTexto.write(datoTexto)
-            mensaje="documento creado.."
+        self.listaDatos.append(datoTexto)
+        datos=json.dumps(self.listaDatos)
+        with open("baseDatos.txt","w") as archivoTexto:
+            archivoTexto.write("")
         archivoTexto.close()
-        return mensaje
+        with open("baseDatos.txt", "a") as archivoTexto:
+            archivoTexto.write(datos)
+        archivoTexto.close()
 
-    def leerArchivo():
-        with open("cristofer.txt","r") as archivo:
+    def leerArchivo(datotexto):
+        with open("baseDatos.txt","r") as archivo:
             datoContenido=archivo.read()
             print(datoContenido)
-            archivo.close()
+        archivo.close()
+        return datoContenido
             
-    def leerLinea():
-        with open("cristofer.txt","r") as archivo:
-            datoContenido=archivo.readline()
-            print(datoContenido)
-            archivo.close()
-            
-    def leerLineas():
-        with open("cristofer.txt","r") as archivo:
-            datoContenido=archivo.readlines()
-            print(datoContenido)
-            print("cantidad de renglones: ",len(datoContenido))
-            archivo.close()
-            
-    def escribeCadenas():
-        listaDatos=["primera linea.\n","segunda linea\n","tercera linea\n"]
-        with open("cristofer.txt","w") as archivo:
-            archivo.writelines(listaDatos)
-            print("cantidad de renglones: ",len(listaDatos))
-            archivo.close()
+    def modificarArchivo(self,datoTexto2):
+        with open("baseDatos.txt","w") as archivoTexto:
+            archivoTexto.write(datoTexto2)
+            print(archivoTexto)
+        archivoTexto.close()
 
-
-    aux=hacerTexto()
-    crearArchivo(aux)
-    leerArchivo()
-    leerLinea()
-    leerLineas()
-    escribeCadenas()
+    def eliminarArchivo(self):
+        with open("baseDatos.txt", "w") as archivo:
+            archivo.write("")
+        archivo.close()
